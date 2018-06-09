@@ -26,5 +26,5 @@ const sortByStrings = (s, t) => {
   return result;
 };
 
-sortByStrings("weather", "therapyw");
-sortByStrings("good", "odg");
+sortByStrings("weather", "therapyw"); // => theeraw
+sortByStrings("good", "odg"); // => oodg

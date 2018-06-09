@@ -48,5 +48,5 @@ const repeatChars = (multiple, chars) => {
   return result;
 };
 
-decodeString("4[ab]");
-decodeString("2[b3[a]]");
+decodeString("4[ab]"); // => "abababab"
+decodeString("2[b3[a]]"); // => "baaabaaa"

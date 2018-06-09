@@ -35,4 +35,4 @@ const changePossibilities = (amount, coinDenom) => {
   return possibilities[amount];
 };
 
-changePossibilities(4, [1, 2, 3]);
+changePossibilities(4, [1, 2, 3]); // => 4
