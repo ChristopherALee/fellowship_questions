@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-// import entitiesReducer from "./entitiesReducer";
+import entitiesReducer from "./entitiesReducer";
 import uiReducer from "./uiReducer";
 
 const rootReducer = combineReducers({
-  // entities: entitiesReducer
+  entities: entitiesReducer,
   ui: uiReducer
 });
 
