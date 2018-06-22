@@ -8,5 +8,6 @@
 
 Event.destroy_all
 
-event1 = Event.create({description: 'test', start_date: Time.strptime('06/21/2018 22:00', '%m/%d/%Y %H:%M'), end_date: Time.strptime('06/21/2018 23:00', '%m/%d/%Y %H:%M')})
-event2 = Event.create({description: 'test2', start_date: Time.strptime('06/21/2018 3:00', '%m/%d/%Y %H:%M'), end_date: Time.strptime('06/21/2018 5:00', '%m/%d/%Y %H:%M')})
+event1 = Event.create({description: 'test', start_date: DateTime.parse('2018-06-21T10:00:00-04:00'), end_date: DateTime.parse('2018-06-21T11:00:00-04:00')})
+event2 = Event.create({description: 'test2', start_date: DateTime.parse('2018-06-21T15:00:00-04:00'), end_date: DateTime.parse('2018-06-22T17:00:00-04:00')})
+event3 = Event.create({description: 'test3', start_date: DateTime.parse('2018-06-22T10:00:00-04:00'), end_date: DateTime.parse('2018-06-22T13:00:00-04:00')})
