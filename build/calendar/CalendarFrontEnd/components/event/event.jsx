@@ -101,8 +101,7 @@ export default class Event extends React.Component {
           minStr = "0" + minStr;
         }
 
-        amOrPm = valHour >= 24 ? "PM" : "AM";
-
+        amOrPm = valHour >= 11 ? "PM" : "AM";
         if (
           this.state.startTime.slice(10) ===
           `T${valHour}:${minStr}:00.000-04:00`
@@ -122,11 +121,11 @@ export default class Event extends React.Component {
           );
         }
 
-        valHour += 1;
-        hour += 1;
         min += 30;
 
         if (min === 60) {
+          valHour += 1;
+          hour += 1;
           min = 0;
         }
 
