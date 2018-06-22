@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import DayContainer from "../day/dayContainer";
 
 export default class Calendar extends React.Component {
   constructor(props) {
@@ -73,12 +74,7 @@ export default class Calendar extends React.Component {
         if (!day) {
           return <li key={idx} id="grid-day" className="inactive-day" />;
         } else {
-          return (
-            <li key={idx} id="grid-day">
-              <p>{day.num}</p>
-              <p>{day.name}</p>
-            </li>
-          );
+          return <DayContainer key={idx} day={day} />;
         }
       });
     }
