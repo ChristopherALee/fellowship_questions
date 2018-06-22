@@ -7,6 +7,12 @@ export default class Day extends React.Component {
     this.renderEvents = this.renderEvents.bind(this);
   }
 
+  componentDidMount() {
+    let date = new Date();
+    let currentDay = date.getDate();
+    this.props.fetchCurrentDay(currentDay);
+  }
+
   renderEvents() {
     if (this.props.events && this.props.events.length) {
       return this.props.events.map(event => {

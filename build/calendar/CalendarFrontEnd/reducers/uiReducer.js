@@ -1,4 +1,7 @@
-import { RECEIVE_DISPLAY_MONTH } from "../actions/uiActions";
+import {
+  RECEIVE_DISPLAY_MONTH,
+  RECEIVE_CURRENT_DAY
+} from "../actions/uiActions";
 
 const uiReducer = (state = {}, action) => {
   let newState;
@@ -6,7 +9,10 @@ const uiReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_DISPLAY_MONTH:
-      newState = Object.assign({}, { displayMonthIdx: action.month });
+      newState = Object.assign({}, state, { displayMonthIdx: action.month });
+      return newState;
+    case RECEIVE_CURRENT_DAY:
+      newState = Object.assign({}, state, { currentDay: action.day });
       return newState;
     default:
       return state;

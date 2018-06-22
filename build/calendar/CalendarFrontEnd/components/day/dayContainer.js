@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Day from "./day";
+import { fetchCurrentDay } from "../../actions/uiActions";
 
 const mapStateToProps = (state, ownProps) => {
   let eventIds, events;
@@ -13,7 +14,6 @@ const mapStateToProps = (state, ownProps) => {
     events = Object.values(state.entities.events).filter(event => {
       return event.month === month && event.day === ownProps.day.num;
     });
-    debugger;
   }
 
   return {
@@ -24,7 +24,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    fetchCurrentDay: day => dispatch(fetchCurrentDay(day))
+  };
 };
 
 export default connect(

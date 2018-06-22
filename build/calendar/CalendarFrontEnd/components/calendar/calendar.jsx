@@ -14,6 +14,7 @@ export default class Calendar extends React.Component {
   componentDidMount() {
     let date = new Date();
     let currentMonth = date.getMonth();
+    let currentDay = date.getDate();
     let monthKeys = this.props.monthKeys;
     this.props.history.push(`${monthKeys[currentMonth]}`);
     this.props.fetchDisplayMonth(currentMonth);
