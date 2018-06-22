@@ -1,4 +1,5 @@
 import React from "react";
+import EventContainer from "../event/eventContainer";
 
 export default class Day extends React.Component {
   constructor(props) {
@@ -19,13 +20,7 @@ export default class Day extends React.Component {
   renderEvents() {
     if (this.props.events && this.props.events.length) {
       return this.props.events.map(event => {
-        return (
-          <li key={event.id}>
-            <p id="scheduled-time">{event.start_time}</p>
-
-            <p id="description">{event.description}</p>
-          </li>
-        );
+        return <EventContainer key={event.id} event={event} />;
       });
     }
   }
