@@ -8,6 +8,7 @@
 #  end_date    :datetime         not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  month_id    :integer          not null
 #
 
 require 'test_helper'
