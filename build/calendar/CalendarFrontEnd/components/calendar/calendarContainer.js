@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import Calendar from "./calendar";
 import { fetchDisplayMonth } from "../../actions/uiActions";
 import { fetchMonthEvents } from "../../actions/monthActions";
+import { fetchMonthEventsDetails } from "../../actions/eventActions";
 
 const mapStateToProps = (state, ownProps) => {
   const days = [
@@ -120,7 +121,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchDisplayMonth: month => dispatch(fetchDisplayMonth(month)),
-    fetchMonthEvents: monthId => dispatch(fetchMonthEvents(monthId))
+    fetchMonthEvents: monthId => dispatch(fetchMonthEvents(monthId)),
+    fetchMonthEventsDetails: monthId =>
+      dispatch(fetchMonthEventsDetails(monthId))
   };
 };
 

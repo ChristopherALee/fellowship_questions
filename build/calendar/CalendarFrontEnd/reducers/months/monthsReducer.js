@@ -7,7 +7,7 @@ const monthsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_MONTH_EVENTS:
       newState = Object.assign({}, state, {
-        [action.events.month]: action.events.events
+        [action.events.id]: action.events
       });
       return newState;
     default:

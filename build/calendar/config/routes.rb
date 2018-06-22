@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :months, only: [:index, :create, :show]
     resources :events, only: [:index, :create, :show, :update, :destroy]
+
+    get '/monthevents/:monthId', to: 'events#monthEvents'
   end
 end

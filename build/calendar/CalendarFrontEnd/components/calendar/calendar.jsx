@@ -17,6 +17,7 @@ export default class Calendar extends React.Component {
     this.props.history.push(`${monthKeys[currentMonth]}`);
     this.props.fetchDisplayMonth(currentMonth);
     this.props.fetchMonthEvents(currentMonth + 1);
+    this.props.fetchMonthEventsDetails(currentMonth + 1);
   }
 
   componentWillReceiveProps(newProps) {
@@ -27,6 +28,7 @@ export default class Calendar extends React.Component {
 
       this.props.fetchDisplayMonth(keyMonth);
       this.props.fetchMonthEvents(keyMonth + 1);
+      this.props.fetchMonthEventsDetails(keyMonth + 1);
     }
   }
 

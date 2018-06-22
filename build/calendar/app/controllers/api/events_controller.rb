@@ -38,6 +38,14 @@ class Api::EventsController < ApplicationController
     end
   end
 
+  def monthEvents
+    @events = Event.all.select do |event|
+      event.month.id == params[:monthId].to_i
+    end
+
+    render '/api/events/index'
+  end
+
   private
   def event_params
     params.require(:event).permit(:description, :start_date, :end_date)
