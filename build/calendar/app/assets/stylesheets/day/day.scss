@@ -1,0 +1,24 @@
+#grid-day {
+  #grid-day-num {
+    margin-bottom: 5px;
+  }
+}
+
+.current-day {
+  #grid-day-num {
+    background-color: rgb(66, 133, 244);
+    color: white;
+    border-radius: 50%;
+    width: fit-content;
+    padding: 4px;
+  }
+}
+
+.not-current-day {
+  #grid-day-num {
+    background-color: transparent;
+    border-radius: 50%;
+    width: fit-content;
+    padding: 4px;
+  }
+}

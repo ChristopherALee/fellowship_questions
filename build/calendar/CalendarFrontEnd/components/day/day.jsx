@@ -5,12 +5,15 @@ export default class Day extends React.Component {
     super(props);
 
     this.renderEvents = this.renderEvents.bind(this);
+    this.isCurrentDay = this.isCurrentDay.bind(this);
   }
 
-  componentDidMount() {
-    let date = new Date();
-    let currentDay = date.getDate();
-    this.props.fetchCurrentDay(currentDay);
+  isCurrentDay() {
+    if (this.props.currentDay) {
+      return "current-day";
+    } else {
+      return "not-current-day";
+    }
   }
 
   renderEvents() {
@@ -29,8 +32,8 @@ export default class Day extends React.Component {
 
   render() {
     return (
-      <div id="grid-day">
-        <p>{this.props.day.num}</p>
+      <div id="grid-day" className={this.isCurrentDay()}>
+        <p id="grid-day-num">{this.props.day.num}</p>
         <p>{this.props.day.name}</p>
 
         <ul id="event-list">{this.renderEvents()}</ul>

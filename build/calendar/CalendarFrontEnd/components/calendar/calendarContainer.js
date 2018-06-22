@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Calendar from "./calendar";
-import { fetchDisplayMonth } from "../../actions/uiActions";
+import { fetchDisplayMonth, fetchCurrentDay } from "../../actions/uiActions";
 import { fetchMonthEvents } from "../../actions/monthActions";
 import { fetchMonthEventsDetails } from "../../actions/eventActions";
 
@@ -110,17 +110,22 @@ const mapStateToProps = (state, ownProps) => {
     displayMonthIdx = state.ui.displayMonthIdx;
   }
 
+  let currentDay;
+  currentDay = state.ui.currentDay ? state.ui.currentDay : null;
+
   return {
     days,
     months,
     monthKeys,
-    displayMonthIdx
+    displayMonthIdx,
+    currentDay
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchDisplayMonth: month => dispatch(fetchDisplayMonth(month)),
+    fetchCurrentDay: day => dispatch(fetchCurrentDay(day)),
     fetchMonthEvents: monthId => dispatch(fetchMonthEvents(monthId)),
     fetchMonthEventsDetails: monthId =>
       dispatch(fetchMonthEventsDetails(monthId))
