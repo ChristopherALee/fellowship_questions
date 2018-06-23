@@ -8,7 +8,7 @@ export default class Event extends React.Component {
       eventModalShown: false,
       eventDescription: this.props.event.description,
       startTime: this.props.event.start_date.slice(10),
-      endTime: this.props.event.end_date
+      endTime: this.props.event.end_date.slice(10)
     };
 
     this.openModal = this.openModal.bind(this);
@@ -137,18 +137,67 @@ export default class Event extends React.Component {
 
       return newTimes;
     } else {
-      let startHour = parseInt(this.state.startTime.slice(1, 3));
-      let startMins = this.state.startTime.slice(4, 6);
-      let orderSumStart = parseInt(startHour + String(startMins));
+      let valHour = 0;
 
-      return times.filter(time => {
-        let endHour = parseInt(time.props.value.slice(1, 3));
-        let mins = time.props.value.slice(4, 6);
-        let orderSumEnd = parseInt(endHour + String(mins));
-        debugger;
+      let hour = 12;
+      let min = 0;
+      let amOrPm;
 
-        return endHour >= startHour && orderSumEnd > orderSumStart;
-      });
+      let newTimes = [];
+      for (let i = 0; i < times.length; i++) {
+        let valHourStr = String(valHour);
+        if (valHourStr.length === 1) {
+          valHourStr = "0" + valHourStr;
+        }
+
+        let minStr = String(min);
+        if (minStr.length === 1) {
+          minStr = "0" + minStr;
+        }
+
+        amOrPm = valHour >= 11 ? "PM" : "AM";
+        if (this.state.endTime === `T${valHourStr}:${minStr}:00.000-04:00`) {
+          newTimes.push(
+            <option
+              selected
+              value={`T${valHourStr}:${minStr}:00.000-04:00`}
+            >{`${hour}:${minStr} ${amOrPm}`}</option>
+          );
+        } else {
+          newTimes.push(
+            <option
+              value={`T${valHourStr}:${minStr}:00.000-04:00`}
+            >{`${hour}:${minStr} ${amOrPm}`}</option>
+          );
+        }
+
+        min += 30;
+
+        if (min === 60) {
+          valHour += 1;
+          hour += 1;
+          min = 0;
+        }
+
+        if (hour === 13) {
+          hour = 1;
+        }
+      }
+
+      return newTimes;
+
+      // let startHour = parseInt(this.state.startTime.slice(1, 3));
+      // let startMins = this.state.startTime.slice(4, 6);
+      // let orderSumStart = parseInt(startHour + String(startMins));
+
+      // return times.filter(time => {
+      //   let endHour = parseInt(time.props.value.slice(1, 3));
+      //   let mins = time.props.value.slice(4, 6);
+      //   let orderSumEnd = parseInt(endHour + String(mins));
+      //   debugger;
+
+      //   return endHour >= startHour && orderSumEnd > orderSumStart;
+      // });
     }
   }
 
