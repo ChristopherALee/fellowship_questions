@@ -7,7 +7,7 @@ export default class Event extends React.Component {
     this.state = {
       eventModalShown: false,
       eventDescription: this.props.event.description,
-      startTime: this.props.event.start_date,
+      startTime: this.props.event.start_date.slice(10),
       endTime: this.props.event.end_date
     };
 
@@ -96,27 +96,28 @@ export default class Event extends React.Component {
 
       let newTimes = [];
       for (let i = 0; i < times.length; i++) {
+        let valHourStr = String(valHour);
+        if (valHourStr.length === 1) {
+          valHourStr = "0" + valHourStr;
+        }
+
         let minStr = String(min);
         if (minStr.length === 1) {
           minStr = "0" + minStr;
         }
 
         amOrPm = valHour >= 11 ? "PM" : "AM";
-        if (
-          this.state.startTime.slice(10) ===
-          `T${valHour}:${minStr}:00.000-04:00`
-        ) {
-          debugger;
+        if (this.state.startTime === `T${valHourStr}:${minStr}:00.000-04:00`) {
           newTimes.push(
             <option
               selected
-              value={`T${valHour}:${minStr}:00.000-04:00`}
+              value={`T${valHourStr}:${minStr}:00.000-04:00`}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         } else {
           newTimes.push(
             <option
-              value={`T${valHour}:${minStr}:00.000-04:00`}
+              value={`T${valHourStr}:${minStr}:00.000-04:00`}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         }
@@ -137,10 +138,16 @@ export default class Event extends React.Component {
       return newTimes;
     } else {
       let startHour = parseInt(this.state.startTime.slice(1, 3));
+      let startMins = this.state.startTime.slice(4, 6);
+      let orderSumStart = parseInt(startHour + String(startMins));
 
       return times.filter(time => {
         let endHour = parseInt(time.props.value.slice(1, 3));
-        return endHour >= startHour;
+        let mins = time.props.value.slice(4, 6);
+        let orderSumEnd = parseInt(endHour + String(mins));
+        debugger;
+
+        return endHour >= startHour && orderSumEnd > orderSumStart;
       });
     }
   }
