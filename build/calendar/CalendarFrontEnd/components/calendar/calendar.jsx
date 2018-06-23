@@ -1,14 +1,25 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import DayContainer from "../day/dayContainer";
+import CreateEventForm from "../event/createEvent/createEventContainer";
 
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      createEventModal: false
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+
     this.currentMonth = this.currentMonth.bind(this);
     this.navPrevMonth = this.navPrevMonth.bind(this);
     this.navNextMonth = this.navNextMonth.bind(this);
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.renderCreateEventModal = this.renderCreateEventModal.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +44,12 @@ export default class Calendar extends React.Component {
       this.props.fetchMonthEvents(keyMonth + 1);
       this.props.fetchMonthEventsDetails(keyMonth + 1);
     }
+  }
+
+  handleChange(field) {
+    return e => {
+      this.setState({ [field]: e.target.value });
+    };
   }
 
   currentMonth() {
@@ -107,6 +124,24 @@ export default class Calendar extends React.Component {
     }
   }
 
+  openModal() {
+    if (!this.state.createEventModal) {
+      this.setState({ createEventModal: true });
+    }
+  }
+
+  closeModal() {
+    if (this.state.createEventModal) {
+      this.setState({ createEventModal: false });
+    }
+  }
+
+  renderCreateEventModal() {
+    if (this.state.createEventModal) {
+      return <CreateEventForm closeModal={this.closeModal} />;
+    }
+  }
+
   render() {
     return (
       <div id="calendar-container">
@@ -123,9 +158,11 @@ export default class Calendar extends React.Component {
             </div>
           </div>
 
-          <div id="create-event-button">
+          <div id="create-event-button" onClick={this.openModal}>
             <p>Create Event</p>
           </div>
+
+          {this.renderCreateEventModal()}
         </section>
 
         <section id="days-of-week">

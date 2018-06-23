@@ -105,20 +105,38 @@ const mapStateToProps = (state, ownProps) => {
 
   let monthKeys = Object.keys(months);
 
-  let displayMonthIdx;
+  let displayMonthIdx, displayMonthStr, currentMonth;
   if (state.ui.displayMonthIdx || state.ui.displayMonthIdx === 0) {
     displayMonthIdx = state.ui.displayMonthIdx;
+
+    // if (displayMonthIdx < 10) {
+    //   displayMonthStr = "0" + String(displayMonthIdx + 1);
+    // } else {
+    //   displayMonthStr = String(displayMonthIdx + 1);
+    // }
+
+    // if (state.entities.months[displayMonthIdx + 1]) {
+    //   currentMonth = state.entities.months[displayMonthIdx + 1].month;
+    // }
   }
 
-  let currentDay;
+  let currentDay, currentDayStr;
   currentDay = state.ui.currentDay ? state.ui.currentDay : null;
+  // if (currentDay && currentDay > 10) {
+  //   currentDayStr = "0" + String(currentDay);
+  // } else {
+  //   currentDayStr = String(currentDay);
+  // }
 
   return {
     days,
     months,
     monthKeys,
     displayMonthIdx,
+    // displayMonthStr,
     currentDay
+    // currentDayStr,
+    // currentMonth
   };
 };
 
