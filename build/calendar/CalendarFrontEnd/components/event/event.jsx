@@ -202,7 +202,7 @@ export default class Event extends React.Component {
     if (this.state.eventModalShown) {
       return (
         <div id="event-modal-container">
-          <div id="event-modal-overlay" />
+          <div id="event-modal-overlay" onClick={this.closeModal} />
 
           <div id="event-modal-detail-container">
             <div id="close-modal-x" onClick={this.closeModal}>
@@ -225,6 +225,8 @@ export default class Event extends React.Component {
                   >
                     {this.populateTimes()}
                   </select>
+
+                  <p> to </p>
 
                   <select
                     id="end-time-select"
