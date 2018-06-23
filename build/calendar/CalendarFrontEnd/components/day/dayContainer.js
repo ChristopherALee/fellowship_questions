@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Day from "./day";
 
 const mapStateToProps = (state, ownProps) => {
-  let eventIds, events, currentDay;
+  let eventIds, events;
   let month = state.ui.displayMonthIdx + 1;
 
   if (state.entities.months[month]) {

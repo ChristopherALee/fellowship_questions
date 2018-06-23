@@ -59,8 +59,9 @@ export default class CreateEventForm extends React.Component {
   }
 
   populateDays() {
+    debugger;
     const currentMonthKey = this.props.currentMonthKey;
-    const currentDay = this.props.currentDay;
+    const currentDay = this.props.currentDay.num;
     const currentDayStr = this.props.currentDayStr;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
 
@@ -169,10 +170,10 @@ export default class CreateEventForm extends React.Component {
   render() {
     return (
       <div id="event-modal-container">
-        <div id="event-modal-overlay" onClick={this.props.closeModal} />
+        <div id="event-modal-overlay" onClick={this.props.closeForm} />
 
         <div id="event-modal-detail-container">
-          <div id="close-modal-x" onClick={this.props.closeModal}>
+          <div id="close-modal-x" onClick={this.props.closeForm}>
             <p>X</p>
           </div>
 

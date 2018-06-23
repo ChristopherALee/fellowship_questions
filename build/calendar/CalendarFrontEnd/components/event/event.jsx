@@ -17,7 +17,9 @@ export default class Event extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  openModal() {
+  openModal(e) {
+    e.stopPropagation();
+
     if (!this.state.eventModalShown) {
       this.setState({ eventModalShown: true });
     }

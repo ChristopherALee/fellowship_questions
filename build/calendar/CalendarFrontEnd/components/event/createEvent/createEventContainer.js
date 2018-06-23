@@ -34,7 +34,7 @@ const mapStateToProps = (state, ownProps) => {
     displayMonthStr,
     currentMonth,
     currentMonthKey,
-    currentDay,
+    // currentDay,
     currentDayStr
   };
 };
