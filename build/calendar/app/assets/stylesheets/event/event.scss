@@ -19,6 +19,7 @@
       }
 
       #event-modal-detail-container {
+        -webkit-animation: pop-in 0.3s;
         z-index: 2;
         height: 30%;
         width: 50%;

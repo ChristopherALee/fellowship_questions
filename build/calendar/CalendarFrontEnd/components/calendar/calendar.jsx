@@ -122,6 +122,10 @@ export default class Calendar extends React.Component {
               <div id="right-arrow" />
             </div>
           </div>
+
+          <div id="create-event-button">
+            <p>Create Event</p>
+          </div>
         </section>
 
         <section id="days-of-week">

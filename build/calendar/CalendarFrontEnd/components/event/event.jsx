@@ -184,8 +184,6 @@ export default class Event extends React.Component {
         }
       }
 
-      // return newTimes;
-
       let startHour = parseInt(this.state.startTime.slice(1, 3));
       let startMins = this.state.startTime.slice(4, 6);
       let orderSumStart = parseInt(startHour + String(startMins));
@@ -194,7 +192,6 @@ export default class Event extends React.Component {
         let endHour = parseInt(time.props.value.slice(1, 3));
         let mins = time.props.value.slice(4, 6);
         let orderSumEnd = parseInt(endHour + String(mins));
-        debugger;
 
         return endHour >= startHour && orderSumEnd > orderSumStart;
       });
