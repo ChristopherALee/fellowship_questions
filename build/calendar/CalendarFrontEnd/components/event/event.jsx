@@ -7,6 +7,8 @@ export default class Event extends React.Component {
     this.state = {
       eventModalShown: false,
       eventDescription: this.props.event.description,
+      month: "",
+      date: "",
       startTime: this.props.event.start_date.slice(10),
       endTime: this.props.event.end_date.slice(10)
     };
@@ -15,6 +17,8 @@ export default class Event extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.renderEventModal = this.renderEventModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    this.populateDate = this.populateDate.bind(this);
   }
 
   openModal(e) {
@@ -35,6 +39,78 @@ export default class Event extends React.Component {
     return e => {
       this.setState({ [field]: e.target.value });
     };
+  }
+
+  populateMonth() {
+    const currentMonth = this.props.currentMonth;
+    const displayMonthStr = this.props.displayMonthStr;
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    return months.map(month => {
+      if (month === currentMonth) {
+        return (
+          <option selected value={`2018-${displayMonthStr}-`}>
+            {month}
+          </option>
+        );
+      } else {
+        return <option value={`2018-${displayMonthStr}-`}>{month}</option>;
+      }
+    });
+  }
+
+  populateDays() {
+    debugger;
+    const currentMonthKey = this.props.currentMonthKey;
+    const currentDay = this.props.currentDay.num;
+    const currentDayStr = this.props.currentDayStr;
+    const daysOfMonth = this.props.months[currentMonthKey].numDays;
+
+    let days = [];
+    for (let day = 1; day <= daysOfMonth; day++) {
+      days.push(day);
+    }
+
+    return days.map(day => {
+      if (day === currentDay) {
+        return (
+          <option selected value={currentDayStr}>
+            {day}
+          </option>
+        );
+      } else {
+        return <option value={currentDayStr}>{day}</option>;
+      }
+    });
+  }
+
+  populateDate() {
+    return (
+      <div id="date-select">
+        <select id="month-select" onChange={this.handleChange("month")}>
+          {this.populateMonth()}
+        </select>
+
+        <select id="day-select" onChange={this.handleChange("date")}>
+          {this.populateDays()}
+        </select>
+        <p>, 2018</p>
+      </div>
+    );
   }
 
   populateTimes(setting = null) {
@@ -221,6 +297,8 @@ export default class Event extends React.Component {
                 />
 
                 <div id="timeframe">
+                  {this.populateDate()}
+
                   <select
                     id="start-time-select"
                     onChange={this.handleChange("startTime")}

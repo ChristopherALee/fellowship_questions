@@ -59,7 +59,6 @@ export default class CreateEventForm extends React.Component {
   }
 
   populateDays() {
-    debugger;
     const currentMonthKey = this.props.currentMonthKey;
     const currentDay = this.props.currentDay.num;
     const currentDayStr = this.props.currentDayStr;

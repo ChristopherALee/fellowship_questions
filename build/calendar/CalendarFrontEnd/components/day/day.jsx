@@ -29,7 +29,14 @@ export default class Day extends React.Component {
   renderEvents() {
     if (this.props.events && this.props.events.length) {
       return this.props.events.map(event => {
-        return <EventContainer key={event.id} event={event} />;
+        return (
+          <EventContainer
+            key={event.id}
+            event={event}
+            months={this.props.months}
+            currentDay={this.props.day}
+          />
+        );
       });
     }
   }
