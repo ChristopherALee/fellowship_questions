@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import CreateEventForm from "./createEvent";
 
 const mapStateToProps = (state, ownProps) => {
-  let displayMonthIdx, displayMonthStr, currentMonth;
+  let displayMonthIdx, displayMonthStr, currentMonth, currentMonthKey;
   if (state.ui.displayMonthIdx || state.ui.displayMonthIdx === 0) {
     displayMonthIdx = state.ui.displayMonthIdx;
 
@@ -17,6 +17,10 @@ const mapStateToProps = (state, ownProps) => {
     }
   }
 
+  if (state.ui.currentMonth) {
+    currentMonthKey = state.ui.currentMonth;
+  }
+
   let currentDay, currentDayStr;
   currentDay = state.ui.currentDay ? state.ui.currentDay : null;
   if (currentDay && currentDay > 10) {
@@ -29,6 +33,7 @@ const mapStateToProps = (state, ownProps) => {
     displayMonthIdx,
     displayMonthStr,
     currentMonth,
+    currentMonthKey,
     currentDay,
     currentDayStr
   };

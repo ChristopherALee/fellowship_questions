@@ -141,7 +141,12 @@ export default class Calendar extends React.Component {
 
   renderCreateEventModal() {
     if (this.state.createEventModal) {
-      return <CreateEventForm closeModal={this.closeModal} />;
+      return (
+        <CreateEventForm
+          closeModal={this.closeModal}
+          months={this.props.months}
+        />
+      );
     }
   }
 
