@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import Calendar from "./calendar";
-import { fetchDisplayMonth, fetchCurrentDay } from "../../actions/uiActions";
+import {
+  fetchDisplayMonth,
+  fetchCurrentDay,
+  fetchCurrentMonth
+} from "../../actions/uiActions";
 import { fetchMonthEvents } from "../../actions/monthActions";
 import { fetchMonthEventsDetails } from "../../actions/eventActions";
 
@@ -105,7 +109,7 @@ const mapStateToProps = (state, ownProps) => {
 
   let monthKeys = Object.keys(months);
 
-  let displayMonthIdx, displayMonthStr, currentMonth;
+  let displayMonthIdx, displayMonthStr;
   if (state.ui.displayMonthIdx || state.ui.displayMonthIdx === 0) {
     displayMonthIdx = state.ui.displayMonthIdx;
 
@@ -120,6 +124,9 @@ const mapStateToProps = (state, ownProps) => {
     // }
   }
 
+  let currentMonth;
+  currentMonth = state.ui.currentMonth ? state.ui.currentMonth : null;
+
   let currentDay, currentDayStr;
   currentDay = state.ui.currentDay ? state.ui.currentDay : null;
   // if (currentDay && currentDay > 10) {
@@ -133,6 +140,7 @@ const mapStateToProps = (state, ownProps) => {
     months,
     monthKeys,
     displayMonthIdx,
+    currentMonth,
     // displayMonthStr,
     currentDay
     // currentDayStr,
@@ -144,6 +152,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchDisplayMonth: month => dispatch(fetchDisplayMonth(month)),
     fetchCurrentDay: day => dispatch(fetchCurrentDay(day)),
+    fetchCurrentMonth: month => dispatch(fetchCurrentMonth(month)),
     fetchMonthEvents: monthId => dispatch(fetchMonthEvents(monthId)),
     fetchMonthEventsDetails: monthId =>
       dispatch(fetchMonthEventsDetails(monthId))

@@ -1,6 +1,7 @@
 import {
   RECEIVE_DISPLAY_MONTH,
-  RECEIVE_CURRENT_DAY
+  RECEIVE_CURRENT_DAY,
+  RECEIVE_CURRENT_MONTH
 } from "../actions/uiActions";
 
 const uiReducer = (state = {}, action) => {
@@ -13,6 +14,9 @@ const uiReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_CURRENT_DAY:
       newState = Object.assign({}, state, { currentDay: action.day });
+      return newState;
+    case RECEIVE_CURRENT_MONTH:
+      newState = Object.assign({}, state, { currentMonth: action.month });
       return newState;
     default:
       return state;

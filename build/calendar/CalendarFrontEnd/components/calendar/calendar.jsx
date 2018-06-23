@@ -29,6 +29,7 @@ export default class Calendar extends React.Component {
     let monthKeys = this.props.monthKeys;
     this.props.history.push(`${monthKeys[currentMonth]}`);
     this.props.fetchDisplayMonth(currentMonth);
+    this.props.fetchCurrentMonth(monthKeys[currentMonth]);
     this.props.fetchCurrentDay(currentDay);
     this.props.fetchMonthEvents(currentMonth + 1);
     this.props.fetchMonthEventsDetails(currentMonth + 1);
@@ -62,6 +63,7 @@ export default class Calendar extends React.Component {
   populateGrid() {
     if (this.props.displayMonthIdx || this.props.displayMonthIdx === 0) {
       let currentDay = this.props.currentDay;
+      let currentMonth = this.props.currentMonth;
       let keyMonth = this.props.monthKeys[this.props.displayMonthIdx];
       let month = this.props.months[keyMonth];
       let start = month.start;
@@ -77,7 +79,8 @@ export default class Calendar extends React.Component {
         } else {
           grid.push({
             num: monthDate,
-            name: this.props.days[dayIdx]
+            name: this.props.days[dayIdx],
+            month: month.url
           });
 
           monthDate += 1;
@@ -94,7 +97,7 @@ export default class Calendar extends React.Component {
         if (!day) {
           return <li key={idx} id="grid-day" className="inactive-day" />;
         } else {
-          if (day.num === currentDay) {
+          if (day.num === currentDay && day.month === currentMonth) {
             return <DayContainer key={idx} day={day} currentDay={true} />;
           } else {
             return <DayContainer key={idx} day={day} currentDay={false} />;
