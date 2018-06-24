@@ -32,6 +32,7 @@ export const fetchMonthEventsDetails = monthId => dispatch => {
 };
 
 export const createEvent = event => dispatch => {
+  debugger;
   return EventApiUtil.createEvent(event).then(event => {
     dispatch(receiveEvent(event));
     return event;

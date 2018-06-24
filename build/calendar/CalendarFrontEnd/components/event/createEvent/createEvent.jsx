@@ -6,10 +6,9 @@ export default class CreateEventForm extends React.Component {
 
     this.state = {
       displayDate: `${this.props.currentMonth} ${this.props.currentDay}, 2018`,
-      // date: `2018-${this.props.displayMonthStr}-${this.props.currentDayStr}`,
       eventDescription: "",
-      month: "",
-      date: "",
+      month: this.props.displayMonthStr,
+      day: this.props.currentDayStr,
       startTime: "T00:00:00.000-04:00",
       endTime: "T00:30:00.000-04:00"
     };
@@ -18,12 +17,38 @@ export default class CreateEventForm extends React.Component {
 
     this.populateMonth = this.populateMonth.bind(this);
     this.populateDate = this.populateDate.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(field) {
     return e => {
       this.setState({ [field]: e.target.value });
     };
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.closeForm();
+
+    let dateStr;
+    if (String(this.props.currentDay.num).length === 1) {
+      dateStr = "0" + String(this.props.currentDay.num);
+    } else {
+      dateStr = String(this.props.currentDay.num);
+    }
+
+    this.props.createEvent({
+      event: {
+        description: this.state.eventDescription,
+        start_date: `2018-${this.state.month}-${dateStr}${
+          this.state.startTime
+        }`,
+        end_date: `2018-${this.state.month}-${dateStr}${this.state.endTime}`,
+        month: this.props.displayMonthIdx + 1
+      }
+    });
   }
 
   populateMonth() {
@@ -89,7 +114,7 @@ export default class CreateEventForm extends React.Component {
           {this.populateMonth()}
         </select>
 
-        <select id="day-select" onChange={this.handleChange("date")}>
+        <select id="day-select" onChange={this.handleChange("day")}>
           {this.populateDays()}
         </select>
         <p>, 2018</p>
@@ -177,7 +202,7 @@ export default class CreateEventForm extends React.Component {
           </div>
 
           <div id="event-modal-detail">
-            <form action="submit" method="post">
+            <form action="submit" method="post" onSubmit={this.handleSubmit}>
               <input
                 type="text"
                 placeholder="Enter event..."

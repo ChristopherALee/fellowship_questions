@@ -74,11 +74,11 @@ export default class Event extends React.Component {
   }
 
   populateDays() {
-    debugger;
     const currentMonthKey = this.props.currentMonthKey;
     const currentDay = this.props.currentDay.num;
     const currentDayStr = this.props.currentDayStr;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
+    debugger;
 
     let days = [];
     for (let day = 1; day <= daysOfMonth; day++) {

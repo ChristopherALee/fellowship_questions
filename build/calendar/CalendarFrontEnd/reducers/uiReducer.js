@@ -13,7 +13,7 @@ const uiReducer = (state = {}, action) => {
       newState = Object.assign({}, state, { displayMonthIdx: action.month });
       return newState;
     case RECEIVE_CURRENT_DAY:
-      newState = Object.assign({}, state, { currentDay: action.day });
+      newState = Object.assign({}, state, { today: action.day });
       return newState;
     case RECEIVE_CURRENT_MONTH:
       newState = Object.assign({}, state, { currentMonth: action.month });

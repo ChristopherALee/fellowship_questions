@@ -128,7 +128,7 @@ const mapStateToProps = (state, ownProps) => {
   currentMonth = state.ui.currentMonth ? state.ui.currentMonth : null;
 
   let currentDay, currentDayStr;
-  currentDay = state.ui.currentDay ? state.ui.currentDay : null;
+  currentDay = state.ui.today ? state.ui.today : null;
   // if (currentDay && currentDay > 10) {
   //   currentDayStr = "0" + String(currentDay);
   // } else {

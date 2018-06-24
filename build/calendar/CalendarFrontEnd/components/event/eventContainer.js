@@ -21,12 +21,13 @@ const mapStateToProps = (state, ownProps) => {
     currentMonthKey = state.ui.currentMonth;
   }
 
-  let currentDay, currentDayStr;
-  currentDay = state.ui.currentDay ? state.ui.currentDay : null;
-  if (currentDay && currentDay > 10) {
-    currentDayStr = "0" + String(currentDay);
+  let today, currentDayStr;
+  today = state.ui.today ? state.ui.today : null;
+
+  if (ownProps.currentDay.num && ownProps.currentDay.num < 10) {
+    currentDayStr = "0" + String(ownProps.currentDay.num);
   } else {
-    currentDayStr = String(currentDay);
+    currentDayStr = String(ownProps.currentDay.num);
   }
 
   return {
@@ -34,7 +35,8 @@ const mapStateToProps = (state, ownProps) => {
     displayMonthStr,
     currentMonth,
     currentMonthKey,
-    currentDayStr
+    currentDayStr,
+    today
   };
 };
 

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import CreateEventForm from "./createEvent";
+import { createEvent } from "../../../actions/eventActions";
 
 const mapStateToProps = (state, ownProps) => {
   let displayMonthIdx, displayMonthStr, currentMonth, currentMonthKey;
@@ -22,12 +23,13 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   let currentDay, currentDayStr;
-  currentDay = state.ui.currentDay ? state.ui.currentDay : null;
-  if (currentDay && currentDay > 10) {
+  currentDay = state.ui.today ? state.ui.today : null;
+  if (currentDay && currentDay < 10) {
     currentDayStr = "0" + String(currentDay);
   } else {
     currentDayStr = String(currentDay);
   }
+  debugger;
 
   return {
     displayMonthIdx,
@@ -39,7 +41,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    createEvent: event => dispatch(createEvent(event))
+  };
 };
 
 export default connect(
