@@ -8,7 +8,7 @@ export default class CreateEventForm extends React.Component {
       displayDate: `${this.props.currentMonth} ${this.props.currentDay}, 2018`,
       eventDescription: "",
       month: this.props.displayMonthStr,
-      day: this.props.currentDayStr,
+      day: this.stringInt(this.props.currentDay.num),
       startTime: "T00:00:00.000",
       endTime: "T00:30:00.000"
     };
@@ -56,21 +56,15 @@ export default class CreateEventForm extends React.Component {
     e.preventDefault();
     this.props.closeForm();
 
-    let dateStr;
-    if (String(this.props.currentDay.num).length === 1) {
-      dateStr = "0" + String(this.props.currentDay.num);
-    } else {
-      dateStr = String(this.props.currentDay.num);
-    }
-
-    debugger;
     this.props.createEvent({
       event: {
         description: this.state.eventDescription,
-        start_date: `2018-${this.state.month}-${dateStr}${
+        start_date: `2018-${this.state.month}-${this.state.day}${
           this.state.startTime
         }`,
-        end_date: `2018-${this.state.month}-${dateStr}${this.state.endTime}`,
+        end_date: `2018-${this.state.month}-${this.state.day}${
+          this.state.endTime
+        }`,
         month: this.props.displayMonthIdx + 1
       }
     });
@@ -78,7 +72,6 @@ export default class CreateEventForm extends React.Component {
 
   populateMonth() {
     const currentMonth = this.props.currentMonth;
-    const displayMonthStr = this.props.displayMonthStr;
 
     const months = [
       "January",
@@ -122,7 +115,7 @@ export default class CreateEventForm extends React.Component {
   populateDays() {
     const currentMonthKey = this.props.currentMonthKey;
     const currentDay = this.props.currentDay.num;
-    const currentDayStr = this.props.currentDayStr;
+    const currentDayStr = this.state.day;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
 
     let days = [];
@@ -131,15 +124,17 @@ export default class CreateEventForm extends React.Component {
     }
 
     return days.map((day, idx) => {
+      let dayStr = this.stringInt(day);
+
       if (day === currentDay) {
         return (
-          <option selected value={currentDayStr} key={idx}>
+          <option selected value={dayStr} key={idx}>
             {day}
           </option>
         );
       } else {
         return (
-          <option value={currentDayStr} key={idx}>
+          <option value={dayStr} key={idx}>
             {day}
           </option>
         );
