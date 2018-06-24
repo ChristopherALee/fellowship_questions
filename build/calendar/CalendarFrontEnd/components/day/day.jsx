@@ -30,18 +30,12 @@ export default class Day extends React.Component {
     if (this.props.events && this.props.events.length) {
       return this.props.events
         .sort((a, b) => {
-          let aHour = a.start_date.slice(11, 13);
-          let aMin = a.start_date.slice(14, 16);
-          let aSum = parseInt(aHour) + parseInt(aMin);
+          let aHour = parseInt(a.start_date.slice(11, 13));
+          let bHour = parseInt(b.start_date.slice(11, 13));
 
-          let bHour = b.start_date.slice(11, 13);
-          let bMin = b.start_date.slice(14, 16);
-          let bSum = parseInt(bHour) + parseInt(bMin);
-
-          debugger;
-          if (aSum < bSum) {
+          if (aHour < bHour) {
             return -1;
-          } else if (aSum > bSum) {
+          } else if (aHour > bHour) {
             return 1;
           } else {
             return 0;
