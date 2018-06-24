@@ -57,9 +57,9 @@ export default class Event extends React.Component {
         if (startTimeMin === "30") {
           newEndTime = `T${this.stringInt(
             parseInt(startTimeHour) + 1
-          )}:00:00.000-04:00`;
+          )}:00:00.000`;
         } else {
-          newEndTime = `T${startTimeHour}:30:00.000-04:00`;
+          newEndTime = `T${startTimeHour}:30:00.000`;
         }
 
         this.setState({ endTime: newEndTime });
@@ -203,18 +203,18 @@ export default class Event extends React.Component {
         }
 
         amOrPm = valHour >= 11 ? "PM" : "AM";
-        if (this.state.startTime === `T${valHourStr}:${minStr}:00.000-04:00`) {
+        if (this.state.startTime === `T${valHourStr}:${minStr}:00.000`) {
           newTimes.push(
             <option
               selected
-              value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              value={`T${valHourStr}:${minStr}:00.000`}
               key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         } else {
           newTimes.push(
             <option
-              value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              value={`T${valHourStr}:${minStr}:00.000`}
               key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
@@ -248,18 +248,18 @@ export default class Event extends React.Component {
         }
 
         amOrPm = valHour >= 12 ? "PM" : "AM";
-        if (this.state.endTime === `T${valHourStr}:${minStr}:00.000-04:00`) {
+        if (this.state.endTime === `T${valHourStr}:${minStr}:00.000`) {
           newTimes.push(
             <option
               selected
-              value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              value={`T${valHourStr}:${minStr}:00.000`}
               key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         } else {
           newTimes.push(
             <option
-              value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              value={`T${valHourStr}:${minStr}:00.000`}
               key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );

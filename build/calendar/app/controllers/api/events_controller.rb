@@ -10,7 +10,7 @@ class Api::EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.month_id = params['event']['month'].to_i
-    debugger
+    
     if @event.save
       render 'api/events/show'
     else
