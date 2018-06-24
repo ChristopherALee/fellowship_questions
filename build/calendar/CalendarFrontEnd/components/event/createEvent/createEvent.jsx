@@ -70,15 +70,22 @@ export default class CreateEventForm extends React.Component {
       "December"
     ];
 
-    return months.map(month => {
+    return months.map((month, idx) => {
+      let realMonth = idx + 1;
+      if (realMonth < 10) {
+        realMonth = "0" + String(realMonth);
+      } else {
+        realMonth = String(realMonth);
+      }
+
       if (month === currentMonth) {
         return (
-          <option selected value={`2018-${displayMonthStr}-`}>
+          <option selected value={`${realMonth}`}>
             {month}
           </option>
         );
       } else {
-        return <option value={`2018-${displayMonthStr}-`}>{month}</option>;
+        return <option value={`${realMonth}`}>{month}</option>;
       }
     });
   }

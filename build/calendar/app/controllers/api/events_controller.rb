@@ -10,7 +10,7 @@ class Api::EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.month_id = params['event']['month'].to_i
-
+    
     if @event.save
       render 'api/events/show'
     else
@@ -19,8 +19,8 @@ class Api::EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find_by_id(params[:id])
-    
+    @event = Event.find_by_id(params[:event][:eventId])
+
     if @event.update(event_params)
       render 'api/events/show'
     else

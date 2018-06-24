@@ -18,6 +18,7 @@ export default class Event extends React.Component {
     this.renderEventModal = this.renderEventModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeEvent = this.removeEvent.bind(this);
 
     this.populateDate = this.populateDate.bind(this);
   }
@@ -48,7 +49,6 @@ export default class Event extends React.Component {
 
     this.props.updateEvent({
       event: {
-        id: this.props.event.id,
         description: this.state.eventDescription,
         start_date: `2018-${this.state.month}-${this.state.day}${
           this.state.startTime
@@ -56,14 +56,17 @@ export default class Event extends React.Component {
         end_date: `2018-${this.state.month}-${this.state.day}${
           this.state.endTime
         }`,
-        month: this.props.displayMonthIdx + 1
+        eventId: this.props.event.id
       }
     });
   }
 
+  removeEvent() {
+    this.props.removeEvent(this.props.event.id);
+  }
+
   populateMonth() {
     const currentMonth = this.props.currentMonth;
-    const displayMonthStr = this.props.displayMonthStr;
 
     const months = [
       "January",
@@ -80,15 +83,22 @@ export default class Event extends React.Component {
       "December"
     ];
 
-    return months.map(month => {
+    return months.map((month, idx) => {
+      let realMonth = idx + 1;
+      if (realMonth < 10) {
+        realMonth = "0" + String(realMonth);
+      } else {
+        realMonth = String(realMonth);
+      }
+
       if (month === currentMonth) {
         return (
-          <option selected value={`2018-${displayMonthStr}-`}>
+          <option selected value={`${realMonth}`}>
             {month}
           </option>
         );
       } else {
-        return <option value={`2018-${displayMonthStr}-`}>{month}</option>;
+        return <option value={`${realMonth}`}>{month}</option>;
       }
     });
   }
@@ -343,6 +353,10 @@ export default class Event extends React.Component {
 
                 <button type="submit">Save</button>
               </form>
+
+              <div id="delete-event-button" onClick={this.removeEvent}>
+                <button>Delete Event</button>
+              </div>
             </div>
           </div>
         </div>

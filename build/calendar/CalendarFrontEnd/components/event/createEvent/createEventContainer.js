@@ -29,7 +29,6 @@ const mapStateToProps = (state, ownProps) => {
   } else {
     currentDayStr = String(currentDay);
   }
-  debugger;
 
   return {
     displayMonthIdx,
