@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   if (state.ui.displayMonthIdx || state.ui.displayMonthIdx === 0) {
     displayMonthIdx = state.ui.displayMonthIdx;
 
-    if (displayMonthIdx < 10) {
+    if (displayMonthIdx + 1 < 10) {
       displayMonthStr = "0" + String(displayMonthIdx + 1);
     } else {
       displayMonthStr = String(displayMonthIdx + 1);

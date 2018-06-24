@@ -23,6 +23,14 @@ export default class Event extends React.Component {
     this.populateDate = this.populateDate.bind(this);
   }
 
+  stringInt(int) {
+    if (int < 10) {
+      return "0" + String(int);
+    } else {
+      return String(int);
+    }
+  }
+
   openModal(e) {
     e.stopPropagation();
 
@@ -40,6 +48,22 @@ export default class Event extends React.Component {
   handleChange(field) {
     return e => {
       this.setState({ [field]: e.target.value });
+
+      if (field === "startTime") {
+        let startTimeHour = e.target.value.slice(1, 3);
+        let startTimeMin = e.target.value.slice(4, 6);
+
+        let newEndTime;
+        if (startTimeMin === "30") {
+          newEndTime = `T${this.stringInt(
+            parseInt(startTimeHour) + 1
+          )}:00:00.000-04:00`;
+        } else {
+          newEndTime = `T${startTimeHour}:30:00.000-04:00`;
+        }
+
+        this.setState({ endTime: newEndTime });
+      }
     };
   }
 
@@ -93,12 +117,16 @@ export default class Event extends React.Component {
 
       if (month === currentMonth) {
         return (
-          <option selected value={`${realMonth}`}>
+          <option selected value={`${realMonth}`} key={idx}>
             {month}
           </option>
         );
       } else {
-        return <option value={`${realMonth}`}>{month}</option>;
+        return (
+          <option value={`${realMonth}`} key={idx}>
+            {month}
+          </option>
+        );
       }
     });
   }
@@ -113,7 +141,7 @@ export default class Event extends React.Component {
       days.push(day);
     }
 
-    return days.map(day => {
+    return days.map((day, idx) => {
       let currentDayStr;
       if (day < 10) {
         currentDayStr = "0" + String(day);
@@ -123,12 +151,16 @@ export default class Event extends React.Component {
 
       if (day === currentDay) {
         return (
-          <option selected value={currentDayStr}>
+          <option selected value={currentDayStr} key={idx}>
             {day}
           </option>
         );
       } else {
-        return <option value={currentDayStr}>{day}</option>;
+        return (
+          <option value={currentDayStr} key={idx}>
+            {day}
+          </option>
+        );
       }
     });
   }
@@ -149,72 +181,23 @@ export default class Event extends React.Component {
   }
 
   populateTimes(setting = null) {
-    let times = [
-      <option value="T00:00:00.000-04:00">12:00 AM</option>,
-      <option value="T00:30:00.000-04:00">12:30 AM</option>,
-      <option value="T01:00:00.000-04:00">1:00 AM</option>,
-      <option value="T01:30:00.000-04:00">1:30 AM</option>,
-      <option value="T02:00:00.000-04:00">2:00 AM</option>,
-      <option value="T02:30:00.000-04:00">2:30 AM</option>,
-      <option value="T03:00:00.000-04:00">3:00 AM</option>,
-      <option value="T03:30:00.000-04:00">3:30 AM</option>,
-      <option value="T04:00:00.000-04:00">4:00 AM</option>,
-      <option value="T04:30:00.000-04:00">4:30 AM</option>,
-      <option value="T05:00:00.000-04:00">5:00 AM</option>,
-      <option value="T05:30:00.000-04:00">5:30 AM</option>,
-      <option value="T06:00:00.000-04:00">6:00 AM</option>,
-      <option value="T06:30:00.000-04:00">6:30 AM</option>,
-      <option value="T07:00:00.000-04:00">7:00 AM</option>,
-      <option value="T07:30:00.000-04:00">7:30 AM</option>,
-      <option value="T08:00:00.000-04:00">8:00 AM</option>,
-      <option value="T08:30:00.000-04:00">8:30 AM</option>,
-      <option value="T09:00:00.000-04:00">9:00 AM</option>,
-      <option value="T09:30:00.000-04:00">9:30 AM</option>,
-      <option value="T10:00:00.000-04:00">10:00 AM</option>,
-      <option value="T10:30:00.000-04:00">10:30 AM</option>,
-      <option value="T11:00:00.000-04:00">11:00 AM</option>,
-      <option value="T11:30:00.000-04:00">11:30 AM</option>,
-      <option value="T12:00:00.000-04:00">12:00 PM</option>,
-      <option value="T12:30:00.000-04:00">12:30 PM</option>,
-      <option value="T13:00:00.000-04:00">1:00 PM</option>,
-      <option value="T13:30:00.000-04:00">1:30 PM</option>,
-      <option value="T14:00:00.000-04:00">2:00 PM</option>,
-      <option value="T14:30:00.000-04:00">2:30 PM</option>,
-      <option value="T15:00:00.000-04:00">3:00 PM</option>,
-      <option value="T15:30:00.000-04:00">3:30 PM</option>,
-      <option value="T16:00:00.000-04:00">4:00 PM</option>,
-      <option value="T16:30:00.000-04:00">4:30 PM</option>,
-      <option value="T17:00:00.000-04:00">5:00 PM</option>,
-      <option value="T17:30:00.000-04:00">5:30 PM</option>,
-      <option value="T18:00:00.000-04:00">6:00 PM</option>,
-      <option value="T18:30:00.000-04:00">6:30 PM</option>,
-      <option value="T19:00:00.000-04:00">7:00 PM</option>,
-      <option value="T19:30:00.000-04:00">7:30 PM</option>,
-      <option value="T20:00:00.000-04:00">8:00 PM</option>,
-      <option value="T20:30:00.000-04:00">8:30 PM</option>,
-      <option value="T21:00:00.000-04:00">9:00 PM</option>,
-      <option value="T21:30:00.000-04:00">9:30 PM</option>,
-      <option value="T22:00:00.000-04:00">10:00 PM</option>,
-      <option value="T22:30:00.000-04:00">10:30 PM</option>,
-      <option value="T23:00:00.000-04:00">11:00 PM</option>,
-      <option value="T23:30:00.000-04:00">11:30 PM</option>
-    ];
+    let valHour = 0;
+    let valHourStr;
+
+    let hour = 12;
+    let min = 0;
+    let minStr;
+    let amOrPm;
 
     if (!setting) {
-      let valHour = 0;
-
-      let hour = 12;
-      let min = 0;
-      let amOrPm;
-
       let newTimes = [];
-      for (let i = 0; i < times.length; i++) {
-        let valHourStr = String(valHour);
+      for (let i = 0; i < 48; i++) {
+        valHourStr = String(valHour);
         if (valHourStr.length === 1) {
           valHourStr = "0" + valHourStr;
         }
 
-        let minStr = String(min);
+        minStr = String(min);
         if (minStr.length === 1) {
           minStr = "0" + minStr;
         }
@@ -225,12 +208,14 @@ export default class Event extends React.Component {
             <option
               selected
               value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         } else {
           newTimes.push(
             <option
               value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         }
@@ -250,36 +235,32 @@ export default class Event extends React.Component {
 
       return newTimes;
     } else {
-      let valHour = 0;
-
-      let hour = 12;
-      let min = 0;
-      let amOrPm;
-
       let newTimes = [];
-      for (let i = 0; i < times.length; i++) {
-        let valHourStr = String(valHour);
+      for (let i = 0; i < 48; i++) {
+        valHourStr = String(valHour);
         if (valHourStr.length === 1) {
           valHourStr = "0" + valHourStr;
         }
 
-        let minStr = String(min);
+        minStr = String(min);
         if (minStr.length === 1) {
           minStr = "0" + minStr;
         }
 
-        amOrPm = valHour >= 11 ? "PM" : "AM";
+        amOrPm = valHour >= 12 ? "PM" : "AM";
         if (this.state.endTime === `T${valHourStr}:${minStr}:00.000-04:00`) {
           newTimes.push(
             <option
               selected
               value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         } else {
           newTimes.push(
             <option
               value={`T${valHourStr}:${minStr}:00.000-04:00`}
+              key={i}
             >{`${hour}:${minStr} ${amOrPm}`}</option>
           );
         }

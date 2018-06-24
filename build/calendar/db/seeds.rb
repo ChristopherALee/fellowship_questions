@@ -26,3 +26,4 @@ event1 = Event.create({description: 'test', start_date: DateTime.parse('2018-06-
 event2 = Event.create({description: 'test2', start_date: DateTime.parse('2018-06-21T15:00:00-04:00'), end_date: DateTime.parse('2018-06-22T17:00:00-04:00'), month_id: month6.id})
 event3 = Event.create({description: 'test3', start_date: DateTime.parse('2018-06-22T10:00:00-04:00'), end_date: DateTime.parse('2018-06-22T13:00:00-04:00'), month_id: month6.id})
 event3 = Event.create({description: 'test88', start_date: DateTime.parse('2018-05-10T08:00:00-04:00'), end_date: DateTime.parse('2018-06-22T15:00:00-04:00'), month_id: month6.id})
+event4 = Event.create({description: 'test89', start_date: DateTime.parse('2018-01-10T08:00:00-04:00'), end_date: DateTime.parse('2018-01-10T09:00:00-04:00'), month_id: month1.id})
