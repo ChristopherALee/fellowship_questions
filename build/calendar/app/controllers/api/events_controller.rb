@@ -20,8 +20,8 @@ class Api::EventsController < ApplicationController
 
   def update
     @event = Event.find_by_id(params[:id])
-
-    if @event.update
+    
+    if @event.update(event_params)
       render 'api/events/show'
     else
       render json: ['Cannot edit event'], status: 403

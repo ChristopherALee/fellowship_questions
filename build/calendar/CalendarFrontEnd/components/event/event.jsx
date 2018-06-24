@@ -7,8 +7,8 @@ export default class Event extends React.Component {
     this.state = {
       eventModalShown: false,
       eventDescription: this.props.event.description,
-      month: "",
-      date: "",
+      month: this.props.displayMonthStr,
+      day: this.props.currentDayStr,
       startTime: this.props.event.start_date.slice(10),
       endTime: this.props.event.end_date.slice(10)
     };
@@ -17,6 +17,7 @@ export default class Event extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.renderEventModal = this.renderEventModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.populateDate = this.populateDate.bind(this);
   }
@@ -39,6 +40,25 @@ export default class Event extends React.Component {
     return e => {
       this.setState({ [field]: e.target.value });
     };
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.closeModal();
+
+    this.props.updateEvent({
+      event: {
+        id: this.props.event.id,
+        description: this.state.eventDescription,
+        start_date: `2018-${this.state.month}-${this.state.day}${
+          this.state.startTime
+        }`,
+        end_date: `2018-${this.state.month}-${this.state.day}${
+          this.state.endTime
+        }`,
+        month: this.props.displayMonthIdx + 1
+      }
+    });
   }
 
   populateMonth() {
@@ -76,9 +96,7 @@ export default class Event extends React.Component {
   populateDays() {
     const currentMonthKey = this.props.currentMonthKey;
     const currentDay = this.props.currentDay.num;
-    const currentDayStr = this.props.currentDayStr;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
-    debugger;
 
     let days = [];
     for (let day = 1; day <= daysOfMonth; day++) {
@@ -86,6 +104,13 @@ export default class Event extends React.Component {
     }
 
     return days.map(day => {
+      let currentDayStr;
+      if (day < 10) {
+        currentDayStr = "0" + String(day);
+      } else {
+        currentDayStr = String(day);
+      }
+
       if (day === currentDay) {
         return (
           <option selected value={currentDayStr}>
@@ -105,7 +130,7 @@ export default class Event extends React.Component {
           {this.populateMonth()}
         </select>
 
-        <select id="day-select" onChange={this.handleChange("date")}>
+        <select id="day-select" onChange={this.handleChange("day")}>
           {this.populateDays()}
         </select>
         <p>, 2018</p>
@@ -288,7 +313,7 @@ export default class Event extends React.Component {
             </div>
 
             <div id="event-modal-detail">
-              <form action="submit" method="post">
+              <form action="submit" method="post" onSubmit={this.handleSubmit}>
                 <input
                   type="text"
                   placeholder={this.props.event.description}

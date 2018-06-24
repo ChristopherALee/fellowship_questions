@@ -32,13 +32,18 @@ export const fetchMonthEventsDetails = monthId => dispatch => {
 };
 
 export const createEvent = event => dispatch => {
-  debugger;
   return EventApiUtil.createEvent(event).then(event => {
     dispatch(receiveEvent(event));
     return event;
   });
 };
 
+export const updateEvent = event => dispatch => {
+  return EventApiUtil.updateEvent(event).then(event => {
+    dispatch(receiveEvent(event));
+    return event;
+  });
+};
 export const removeEvent = eventId => dispatch => {
   return EventApiUtil.deleteEvent(eventId).then(event => {
     dispatch(deleteEvent(event));

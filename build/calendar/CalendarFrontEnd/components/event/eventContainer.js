@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Event from "./event";
+import { updateEvent } from "../../actions/eventActions";
 
 const mapStateToProps = (state, ownProps) => {
   let displayMonthIdx, displayMonthStr, currentMonth, currentMonthKey;
@@ -41,7 +42,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    updateEvent: event => dispatch(updateEvent(event))
+  };
 };
 
 export default connect(
