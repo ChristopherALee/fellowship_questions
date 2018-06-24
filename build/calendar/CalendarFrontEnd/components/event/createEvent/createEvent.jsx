@@ -344,21 +344,23 @@ export default class CreateEventForm extends React.Component {
               <div id="timeframe">
                 {this.populateDate()}
 
-                <select
-                  id="start-time-select"
-                  onChange={this.handleChange("startTime")}
-                >
-                  {this.populateTimes()}
-                </select>
+                <div id="time-select">
+                  <select
+                    id="start-time-select"
+                    onChange={this.handleChange("startTime")}
+                  >
+                    {this.populateTimes()}
+                  </select>
 
-                <p> to </p>
+                  <p> to </p>
 
-                <select
-                  id="end-time-select"
-                  onChange={this.handleChange("endTime")}
-                >
-                  {this.populateTimes("endTime")}
-                </select>
+                  <select
+                    id="end-time-select"
+                    onChange={this.handleChange("endTime")}
+                  >
+                    {this.populateTimes("endTime")}
+                  </select>
+                </div>
               </div>
 
               <button type="submit">Save</button>
