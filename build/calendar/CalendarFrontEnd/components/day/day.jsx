@@ -28,16 +28,35 @@ export default class Day extends React.Component {
 
   renderEvents() {
     if (this.props.events && this.props.events.length) {
-      return this.props.events.map(event => {
-        return (
-          <EventContainer
-            key={event.id}
-            event={event}
-            months={this.props.months}
-            currentDay={this.props.day}
-          />
-        );
-      });
+      return this.props.events
+        .sort((a, b) => {
+          let aHour = a.start_date.slice(11, 13);
+          let aMin = a.start_date.slice(14, 16);
+          let aSum = parseInt(aHour) + parseInt(aMin);
+
+          let bHour = b.start_date.slice(11, 13);
+          let bMin = b.start_date.slice(14, 16);
+          let bSum = parseInt(bHour) + parseInt(bMin);
+
+          debugger;
+          if (aSum < bSum) {
+            return -1;
+          } else if (aSum > bSum) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
+        .map(event => {
+          return (
+            <EventContainer
+              key={event.id}
+              event={event}
+              months={this.props.months}
+              currentDay={this.props.day}
+            />
+          );
+        });
     }
   }
 
@@ -73,7 +92,6 @@ export default class Day extends React.Component {
         onClick={this.openForm}
       >
         <p id="grid-day-num">{this.props.day.num}</p>
-        <p>{this.props.day.name}</p>
 
         <ul id="event-list">{this.renderEvents()}</ul>
 
