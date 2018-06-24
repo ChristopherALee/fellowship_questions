@@ -203,7 +203,7 @@ export default class Event extends React.Component {
         }
 
         amOrPm = valHour >= 11 ? "PM" : "AM";
-        if (this.state.startTime === `T${valHourStr}:${minStr}:00.000`) {
+        if (this.state.startTime === `T${valHourStr}:${minStr}:00.000Z`) {
           newTimes.push(
             <option
               selected
