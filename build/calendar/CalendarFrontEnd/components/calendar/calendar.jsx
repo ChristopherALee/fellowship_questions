@@ -10,6 +10,7 @@ export default class Calendar extends React.Component {
     this.currentMonth = this.currentMonth.bind(this);
     this.navPrevMonth = this.navPrevMonth.bind(this);
     this.navNextMonth = this.navNextMonth.bind(this);
+    this.navCurrentMonth = this.navCurrentMonth.bind(this);
   }
 
   componentDidMount() {
@@ -82,7 +83,6 @@ export default class Calendar extends React.Component {
           return <li key={idx} id="grid-day" className="inactive-day" />;
         } else {
           if (day.num === currentDay && day.month === currentMonth) {
-            debugger;
             return (
               <DayContainer
                 key={idx}
@@ -126,10 +126,22 @@ export default class Calendar extends React.Component {
     }
   }
 
+  navCurrentMonth() {
+    if (
+      this.props.currentMonth !== this.props.history.location.pathname.slice(1)
+    ) {
+      this.props.history.push(this.props.currentMonth);
+    }
+  }
+
   render() {
     return (
       <div id="calendar-container">
         <section id="header">
+          <div id="today-button" onClick={this.navCurrentMonth}>
+            Today
+          </div>
+
           <div id="header-sub">
             <div id="left-arrow-container" onClick={this.navPrevMonth}>
               <div id="left-arrow" />
