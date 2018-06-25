@@ -17,7 +17,7 @@ export default class Day extends React.Component {
     this.closeForm = this.closeForm.bind(this);
     this.renderCreateEventForm = this.renderCreateEventForm.bind(this);
 
-    // this.moreEventsMessage = this.moreEventsMessage.bind(this);
+    this.moreEventsMessage = this.moreEventsMessage.bind(this);
   }
 
   isCurrentDay() {
@@ -80,21 +80,19 @@ export default class Day extends React.Component {
     }
   }
 
-  // moreEventsMessage() {
-  //   if (
-  //     document.getElementsByClassName(`event-list-${this.props.day.num}`)
-  //       .length &&
-  //     document.getElementsByClassName(`event-list-${this.props.day.num}`)[0]
-  //       .offsetHeight > 100
-  //   ) {
-  //     debugger;
-  //     return (
-  //       <div id="more-events-msg">
-  //         <p>See more (scroll down)</p>
-  //       </div>
-  //     );
-  //   }
-  // }
+  moreEventsMessage() {
+    if (
+      this.props.events &&
+      this.props.events.length &&
+      this.props.events.length >= 7
+    ) {
+      return (
+        <div id="more-events-msg">
+          <p>+ more events</p>
+        </div>
+      );
+    }
+  }
 
   render() {
     return (
@@ -110,7 +108,7 @@ export default class Day extends React.Component {
 
         <ul id="event-list" className={`event-list-${this.props.day.num}`}>
           {this.renderEvents()}
-          {/* {this.moreEventsMessage()} */}
+          {this.moreEventsMessage()}
         </ul>
 
         {this.renderCreateEventForm()}
