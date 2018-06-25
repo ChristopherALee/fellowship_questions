@@ -8,6 +8,7 @@
       display: flex;
       align-items: center;
       margin-bottom: 5px;
+      cursor: pointer;
 
       #scheduled-time {
         font-size: 13px;
@@ -21,6 +22,16 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+    }
+
+    #event-list-item:hover {
+      #scheduled-time {
+        color: rgb(66, 133, 244);
+      }
+
+      #description {
+        color: rgb(66, 133, 244);
       }
     }
   }

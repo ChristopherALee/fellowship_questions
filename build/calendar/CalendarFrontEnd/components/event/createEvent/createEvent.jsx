@@ -56,7 +56,6 @@ class CreateEventForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.closeForm();
-    let currentMonthKey = this.props.currentMonthKey;
     let months = this.props.months;
     let assignedMonth = Object.values(months).filter(
       month => month.month === parseInt(this.state.month)

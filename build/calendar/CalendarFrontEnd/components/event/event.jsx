@@ -1,6 +1,7 @@
 import React from "react";
+import { withRouter } from "react-router";
 
-export default class Event extends React.Component {
+class Event extends React.Component {
   constructor(props) {
     super(props);
 
@@ -70,19 +71,31 @@ export default class Event extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.closeModal();
+    let months = this.props.months;
+    let assignedMonth = Object.values(months).filter(
+      month => month.month === parseInt(this.state.month)
+    );
 
-    this.props.updateEvent({
-      event: {
-        description: this.state.eventDescription,
-        start_date: `2018-${this.state.month}-${this.state.day}${
-          this.state.startTime
-        }`,
-        end_date: `2018-${this.state.month}-${this.state.day}${
-          this.state.endTime
-        }`,
-        eventId: this.props.event.id
-      }
-    });
+    let that = this;
+
+    this.props
+      .updateEvent({
+        event: {
+          description: this.state.eventDescription,
+          start_date: `2018-${this.state.month}-${this.state.day}${
+            this.state.startTime
+          }`,
+          end_date: `2018-${this.state.month}-${this.state.day}${
+            this.state.endTime
+          }`,
+          eventId: this.props.event.id
+        }
+      })
+      .then(success => {
+        if (that.props.location.pathname.slice(1) !== assignedMonth[0].url) {
+          that.props.history.push(assignedMonth[0].url);
+        }
+      });
   }
 
   removeEvent() {
@@ -359,3 +372,5 @@ export default class Event extends React.Component {
     );
   }
 }
+
+export default withRouter(Event);
