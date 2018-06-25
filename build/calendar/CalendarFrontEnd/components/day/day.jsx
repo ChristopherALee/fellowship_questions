@@ -89,6 +89,8 @@ export default class Day extends React.Component {
 
         <ul id="event-list">{this.renderEvents()}</ul>
 
+        <div id="add-event-symbol">+</div>
+
         {this.renderCreateEventForm()}
       </div>
     );

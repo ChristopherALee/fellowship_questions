@@ -1,4 +1,7 @@
 #grid-day {
+  cursor: pointer;
+  position: relative;
+
   #grid-day-num {
     margin-bottom: 5px;
   }
@@ -47,6 +50,26 @@
     width: fit-content;
     padding: 4px;
   }
+
+  #add-event-symbol {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 24px;
+  }
+}
+.current-day:hover {
+  #add-event-symbol {
+    display: block;
+    background-color: #db4437;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .not-current-day {
@@ -55,5 +78,25 @@
     border-radius: 50%;
     width: fit-content;
     padding: 4px;
+  }
+
+  #add-event-symbol {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 24px;
+  }
+}
+.not-current-day:hover {
+  #add-event-symbol {
+    display: block;
+    background-color: #db4437;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
   }
 }
