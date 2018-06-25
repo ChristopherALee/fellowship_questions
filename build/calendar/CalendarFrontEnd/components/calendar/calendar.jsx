@@ -28,10 +28,10 @@ export default class Calendar extends React.Component {
     this.props.fetchMonthEventsDetails(currentMonth + 1);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (this.props.location.pathname !== newProps.location.pathname) {
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       let keyMonth = this.props.monthKeys.findIndex(
-        month => month === newProps.location.pathname.slice(1)
+        month => month === this.props.location.pathname.slice(1)
       );
 
       this.props.fetchDisplayMonth(keyMonth);
