@@ -124,7 +124,9 @@ class CreateEventForm extends React.Component {
   }
 
   populateDays() {
-    const currentMonthKey = this.props.location.pathname.slice(1);
+    const currentMonthKey = Object.keys(this.props.months)[
+      parseInt(this.state.month) - 1
+    ];
     const currentDay = this.props.currentDay.num;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
 
