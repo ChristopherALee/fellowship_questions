@@ -17,11 +17,12 @@ class Event extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.renderEventModal = this.renderEventModal.bind(this);
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.removeEvent = this.removeEvent.bind(this);
 
     this.populateDate = this.populateDate.bind(this);
+    this.removeEvent = this.removeEvent.bind(this);
   }
 
   stringInt(int) {
@@ -121,12 +122,7 @@ class Event extends React.Component {
     ];
 
     return months.map((month, idx) => {
-      let realMonth = idx + 1;
-      if (realMonth < 10) {
-        realMonth = "0" + String(realMonth);
-      } else {
-        realMonth = String(realMonth);
-      }
+      let realMonth = this.stringInt(idx + 1);
 
       if (month === currentMonth) {
         return (
@@ -145,7 +141,7 @@ class Event extends React.Component {
   }
 
   populateDays() {
-    const currentMonthKey = this.props.currentMonthKey;
+    const currentMonthKey = this.props.location.pathname.slice(1);
     const currentDay = this.props.currentDay.num;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
 
@@ -155,12 +151,7 @@ class Event extends React.Component {
     }
 
     return days.map((day, idx) => {
-      let currentDayStr;
-      if (day < 10) {
-        currentDayStr = "0" + String(day);
-      } else {
-        currentDayStr = String(day);
-      }
+      let currentDayStr = this.stringInt(day);
 
       if (day === currentDay) {
         return (

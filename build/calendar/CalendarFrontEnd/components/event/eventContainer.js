@@ -3,7 +3,13 @@ import Event from "./event";
 import { updateEvent, removeEvent } from "../../actions/eventActions";
 
 const mapStateToProps = (state, ownProps) => {
-  let displayMonthIdx, displayMonthStr, currentMonth, currentMonthKey;
+  let displayMonthIdx,
+    displayMonthStr,
+    currentMonth,
+    currentMonthKey,
+    today,
+    currentDayStr;
+
   if (state.ui.displayMonthIdx || state.ui.displayMonthIdx === 0) {
     displayMonthIdx = state.ui.displayMonthIdx;
 
@@ -18,11 +24,8 @@ const mapStateToProps = (state, ownProps) => {
     }
   }
 
-  if (state.ui.currentMonth) {
-    currentMonthKey = state.ui.currentMonth;
-  }
+  currentMonthKey = state.ui.currentMonth ? state.ui.currentMonth : null;
 
-  let today, currentDayStr;
   today = state.ui.today ? state.ui.today : null;
 
   if (ownProps.currentDay.num && ownProps.currentDay.num < 10) {
