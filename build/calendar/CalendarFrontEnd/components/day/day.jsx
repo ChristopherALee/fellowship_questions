@@ -85,11 +85,12 @@ export default class Day extends React.Component {
         className={this.isCurrentDay()}
         onClick={this.openForm}
       >
-        <p id="grid-day-num">{this.props.day.num}</p>
+        <div id="grid-day-header">
+          <div id="grid-day-num">{this.props.day.num}</div>
+          <div id="add-event-symbol">+</div>
+        </div>
 
         <ul id="event-list">{this.renderEvents()}</ul>
-
-        <div id="add-event-symbol">+</div>
 
         {this.renderCreateEventForm()}
       </div>

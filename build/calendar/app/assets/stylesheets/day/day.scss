@@ -1,6 +1,10 @@
 #grid-day {
   cursor: pointer;
-  position: relative;
+
+  #grid-day-header {
+    display: flex;
+    justify-content: space-between;
+  }
 
   #grid-day-num {
     margin-bottom: 5px;
@@ -53,7 +57,6 @@
 
   #add-event-symbol {
     display: none;
-    position: absolute;
     right: 10px;
     bottom: 10px;
     font-size: 24px;
@@ -82,7 +85,6 @@
 
   #add-event-symbol {
     display: none;
-    position: absolute;
     right: 10px;
     bottom: 10px;
     font-size: 24px;
