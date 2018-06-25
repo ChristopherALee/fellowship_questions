@@ -25,85 +25,96 @@ const mapStateToProps = (state, ownProps) => {
       start: "Monday",
       end: "Wednesday",
       parsed: "January 2018",
-      url: "Jan2018"
+      url: "Jan2018",
+      month: 1
     },
     Feb2018: {
       numDays: 28,
       start: "Thursday",
       end: "Wednesday",
       parsed: "February 2018",
-      url: "Feb2018"
+      url: "Feb2018",
+      month: 2
     },
     Mar2018: {
       numDays: 31,
       start: "Thursday",
       end: "Saturday",
       parsed: "March 2018",
-      url: "Mar2018"
+      url: "Mar2018",
+      month: 3
     },
     Apr2018: {
       numDays: 30,
       start: "Sunday",
       end: "Monday",
       parsed: "April 2018",
-      url: "Apr2018"
+      url: "Apr2018",
+      month: 4
     },
     May2018: {
       numDays: 31,
       start: "Tuesday",
       end: "Thursday",
       parsed: "May 2018",
-      url: "May2018"
+      url: "May2018",
+      month: 5
     },
     Jun2018: {
       numDays: 30,
-      idxStart: 5,
       start: "Friday",
       end: "Saturday",
       parsed: "June 2018",
-      url: "Jun2018"
+      url: "Jun2018",
+      month: 6
     },
     Jul2018: {
       numDays: 31,
       start: "Sunday",
       end: "Tuesday",
       parsed: "July 2018",
-      url: "Jul2018"
+      url: "Jul2018",
+      month: 7
     },
     Aug2018: {
       numDays: 31,
       start: "Wednesday",
       end: "Friday",
       parsed: "August 2018",
-      url: "Aug2018"
+      url: "Aug2018",
+      month: 8
     },
     Sept2018: {
       numDays: 30,
       start: "Saturday",
       end: "Sunday",
       parsed: "September 2018",
-      url: "Sept2018"
+      url: "Sept2018",
+      month: 9
     },
     Oct2018: {
       numDays: 31,
       start: "Monday",
       end: "Wednesday",
       parsed: "October 2018",
-      url: "Oct2018"
+      url: "Oct2018",
+      month: 10
     },
     Nov2018: {
       numDays: 30,
       start: "Thursday",
       end: "Friday",
       parsed: "November 2018",
-      url: "Nov2018"
+      url: "Nov2018",
+      month: 11
     },
     Dec2018: {
       numDays: 31,
       start: "Saturday",
       end: "Monday",
       parsed: "December 2018",
-      url: "Dec2018"
+      url: "Dec2018",
+      month: 12
     }
   };
 

@@ -98,6 +98,7 @@ export default class Calendar extends React.Component {
           return <li key={idx} id="grid-day" className="inactive-day" />;
         } else {
           if (day.num === currentDay && day.month === currentMonth) {
+            debugger;
             return (
               <DayContainer
                 key={idx}

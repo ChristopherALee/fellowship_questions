@@ -1,6 +1,7 @@
 import React from "react";
+import { withRouter } from "react-router";
 
-export default class CreateEventForm extends React.Component {
+class CreateEventForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -55,19 +56,31 @@ export default class CreateEventForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.closeForm();
+    let currentMonthKey = this.props.currentMonthKey;
+    let months = this.props.months;
+    let assignedMonth = Object.values(months).filter(
+      month => month.month === parseInt(this.state.month)
+    );
 
-    this.props.createEvent({
-      event: {
-        description: this.state.eventDescription,
-        start_date: `2018-${this.state.month}-${this.state.day}${
-          this.state.startTime
-        }`,
-        end_date: `2018-${this.state.month}-${this.state.day}${
-          this.state.endTime
-        }`,
-        month: this.props.displayMonthIdx + 1
-      }
-    });
+    let that = this;
+    this.props
+      .createEvent({
+        event: {
+          description: this.state.eventDescription,
+          start_date: `2018-${this.state.month}-${this.state.day}${
+            this.state.startTime
+          }`,
+          end_date: `2018-${this.state.month}-${this.state.day}${
+            this.state.endTime
+          }`,
+          month: this.props.displayMonthIdx + 1
+        }
+      })
+      .then(success => {
+        if (that.props.location.pathname.slice(1) !== assignedMonth[0].url) {
+          that.props.history.push(assignedMonth[0].url);
+        }
+      });
   }
 
   populateMonth() {
@@ -371,3 +384,5 @@ export default class CreateEventForm extends React.Component {
     );
   }
 }
+
+export default withRouter(CreateEventForm);
