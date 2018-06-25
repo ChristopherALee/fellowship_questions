@@ -11,6 +11,8 @@ export default class Calendar extends React.Component {
     this.navPrevMonth = this.navPrevMonth.bind(this);
     this.navNextMonth = this.navNextMonth.bind(this);
     this.navCurrentMonth = this.navCurrentMonth.bind(this);
+    this.activeLeftArrow = this.activeLeftArrow.bind(this);
+    this.activeRightArrow = this.activeRightArrow.bind(this);
   }
 
   componentDidMount() {
@@ -116,6 +118,22 @@ export default class Calendar extends React.Component {
     }
   }
 
+  activeLeftArrow() {
+    if (this.props.displayMonthIdx === 0) {
+      return <div id="inactive-left-arrow" />;
+    } else {
+      return <div id="left-arrow" />;
+    }
+  }
+
+  activeRightArrow() {
+    if (this.props.displayMonthIdx === 11) {
+      return <div id="inactive-right-arrow" />;
+    } else {
+      return <div id="right-arrow" />;
+    }
+  }
+
   navNextMonth() {
     if (this.props.displayMonthIdx === 11) {
       return;
@@ -144,13 +162,13 @@ export default class Calendar extends React.Component {
 
           <div id="header-sub">
             <div id="left-arrow-container" onClick={this.navPrevMonth}>
-              <div id="left-arrow" />
+              {this.activeLeftArrow()}
             </div>
 
             <h1 id="month">{this.currentMonth()}</h1>
 
             <div id="right-arrow-container" onClick={this.navNextMonth}>
-              <div id="right-arrow" />
+              {this.activeRightArrow()}
             </div>
           </div>
         </section>
