@@ -14,10 +14,9 @@ class CreateEventForm extends React.Component {
       endTime: "T00:30:00.000"
     };
 
-    this.populateTimes = this.populateTimes.bind(this);
-
     this.populateMonth = this.populateMonth.bind(this);
     this.populateDate = this.populateDate.bind(this);
+    this.populateTimes = this.populateTimes.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -125,9 +124,8 @@ class CreateEventForm extends React.Component {
   }
 
   populateDays() {
-    const currentMonthKey = this.props.currentMonthKey;
+    const currentMonthKey = this.props.location.pathname.slice(1);
     const currentDay = this.props.currentDay.num;
-    const currentDayStr = this.state.day;
     const daysOfMonth = this.props.months[currentMonthKey].numDays;
 
     let days = [];

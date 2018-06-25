@@ -3,7 +3,13 @@ import CreateEventForm from "./createEvent";
 import { createEvent } from "../../../actions/eventActions";
 
 const mapStateToProps = (state, ownProps) => {
-  let displayMonthIdx, displayMonthStr, currentMonth, currentMonthKey;
+  let displayMonthIdx,
+    displayMonthStr,
+    currentMonth,
+    currentMonthKey,
+    currentDay,
+    currentDayStr;
+
   if (state.ui.displayMonthIdx || state.ui.displayMonthIdx === 0) {
     displayMonthIdx = state.ui.displayMonthIdx;
 
@@ -22,8 +28,8 @@ const mapStateToProps = (state, ownProps) => {
     currentMonthKey = state.ui.currentMonth;
   }
 
-  let currentDay, currentDayStr;
   currentDay = state.ui.today ? state.ui.today : null;
+
   if (currentDay && currentDay < 10) {
     currentDayStr = "0" + String(currentDay);
   } else {
