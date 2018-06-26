@@ -340,11 +340,11 @@ class Event extends React.Component {
                   </div>
                 </div>
 
-                <button type="submit">Save</button>
+                <button type="submit">SAVE</button>
               </form>
 
               <div id="delete-event-button" onClick={this.removeEvent}>
-                <button>Delete Event</button>
+                <button>REMOVE EVENT</button>
               </div>
             </div>
           </div>
