@@ -348,7 +348,7 @@ class CreateEventForm extends React.Component {
             <form action="submit" method="post" onSubmit={this.handleSubmit}>
               <input
                 type="text"
-                placeholder="Enter event..."
+                placeholder="Add Description..."
                 value={this.state.eventDescription}
                 onChange={this.handleChange("eventDescription")}
               />
@@ -375,7 +375,7 @@ class CreateEventForm extends React.Component {
                 </div>
               </div>
 
-              <button type="submit">Save</button>
+              <button type="submit">CREATE</button>
             </form>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import EventContainer from "../event/eventContainer";
 import CreateEventForm from "../event/createEvent/createEventContainer";
+import ExtendedEvent from "../event/extendedEvent/extendedEvent";
 
 export default class Day extends React.Component {
   constructor(props) {
@@ -18,6 +19,9 @@ export default class Day extends React.Component {
     this.renderCreateEventForm = this.renderCreateEventForm.bind(this);
 
     this.moreEventsMessage = this.moreEventsMessage.bind(this);
+    this.openExtendedEvent = this.openExtendedEvent.bind(this);
+    this.closeExtendedEvent = this.closeExtendedEvent.bind(this);
+    this.renderExtendedEvent = this.renderExtendedEvent.bind(this);
   }
 
   isCurrentDay() {
@@ -56,8 +60,13 @@ export default class Day extends React.Component {
     }
   }
 
-  openForm() {
-    if (!this.state.renderCreateEventForm) {
+  openForm(e) {
+    if (
+      (e.target.id === "grid-day" ||
+        e.target.id === "grid-day-header" ||
+        e.target.id === "add-event-symbol") &&
+      !this.state.renderCreateEventForm
+    ) {
       this.setState({ renderCreateEventForm: true });
     }
   }
@@ -87,9 +96,36 @@ export default class Day extends React.Component {
       this.props.events.length >= 7
     ) {
       return (
-        <div id="more-events-msg">
+        <div id="more-events-msg" onClick={this.openExtendedEvent}>
           <p>+ more events</p>
         </div>
+      );
+    }
+  }
+
+  openExtendedEvent(e) {
+    e.stopPropagation();
+
+    if (!this.state.renderExtendedEvent) {
+      this.setState({ renderExtendedEvent: true });
+    }
+  }
+
+  closeExtendedEvent() {
+    if (this.state.renderExtendedEvent) {
+      this.setState({ renderExtendedEvent: false });
+    }
+  }
+
+  renderExtendedEvent() {
+    if (this.state.renderExtendedEvent) {
+      return (
+        <ExtendedEvent
+          events={this.props.events}
+          months={this.props.months}
+          currentDay={this.props.day}
+          closeExtendedEvent={this.closeExtendedEvent}
+        />
       );
     }
   }
@@ -101,9 +137,11 @@ export default class Day extends React.Component {
         className={this.isCurrentDay()}
         onClick={this.openForm}
       >
-        <div id="grid-day-header">
+        <div id="grid-day-header" onClick={this.openForm}>
           <div id="grid-day-num">{this.props.day.num}</div>
-          <div id="add-event-symbol">+</div>
+          <div id="add-event-symbol" onClick={this.openForm}>
+            +
+          </div>
         </div>
 
         <ul id="event-list" className={`event-list-${this.props.day.num}`}>
@@ -111,6 +149,7 @@ export default class Day extends React.Component {
           {this.moreEventsMessage()}
         </ul>
 
+        {this.renderExtendedEvent()}
         {this.renderCreateEventForm()}
       </div>
     );
